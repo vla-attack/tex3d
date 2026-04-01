@@ -68,7 +68,6 @@ nav {
     radial-gradient(ellipse 70% 50% at 50% -10%, rgba(200,136,42,0.12) 0%, transparent 60%),
     var(--paper);
 }
-/* Decorative ruled lines */
 .hero::before {
   content: '';
   position: absolute; inset: 0;
@@ -208,42 +207,19 @@ hr.divider {
 .contrib-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
 .contrib-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
 
-/* ── VIDEO / DEMO GRID ── */
-.sim-header {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem; font-style: italic;
-  color: var(--muted); text-align: center; margin-bottom: 1.6rem;
-}
-.demo-tabs {
-  display: flex; gap: 0.5rem; margin-bottom: 1.6rem; flex-wrap: wrap;
-}
-.demo-tab {
-  padding: 0.4rem 1rem;
-  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
-  border: 1px solid var(--border);
-  border-radius: 3px; cursor: pointer;
-  background: transparent; color: var(--muted);
-  transition: all 0.2s; font-family: 'Source Serif 4', serif;
-}
-.demo-tab.active, .demo-tab:hover {
-  background: var(--ink); color: var(--paper); border-color: var(--ink);
-}
-
-/* Video panels grid */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
+/* ── VIDEO GRID — always 4 columns ── */
 .video-grid-4 {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  margin-bottom: 2.4rem;
 }
+/* Responsive fallback */
 @media (max-width: 900px) {
   .video-grid-4 { grid-template-columns: repeat(2, 1fr); }
 }
-@media (min-width: 700px) {
-  .video-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) {
+  .video-grid-4 { grid-template-columns: 1fr; }
 }
 
 .video-panel {
@@ -265,7 +241,6 @@ hr.divider {
   gap: 0.8rem; cursor: pointer;
   position: relative; overflow: hidden;
 }
-/* Animated scan line effect */
 .video-inner::after {
   content: '';
   position: absolute; top: -100%; left: 0; right: 0; height: 40%;
@@ -304,9 +279,17 @@ hr.divider {
   font-size: 0.68rem; padding: 0.15rem 0.55rem;
   border-radius: 2px; font-weight: 600; letter-spacing: 0.06em;
   text-transform: uppercase;
+  flex-shrink: 0; margin-left: 0.5rem;
 }
 .badge-attack { background: rgba(192,57,43,0.25); color: #e8705f; }
 .badge-clean  { background: rgba(52,180,100,0.2);  color: #52c878; }
+
+/* Task section label */
+.task-label {
+  font-size: 0.92rem; font-weight: 600; color: var(--amber);
+  margin-bottom: 0.8rem; margin-top: 0.2rem;
+  letter-spacing: 0.02em;
+}
 
 /* ── RESULTS TABLE ── */
 .table-scroll { overflow-x: auto; border-radius: 6px; border: 1px solid var(--border); margin-top: 1.6rem; }
@@ -324,7 +307,6 @@ thead tr:first-child th {
 thead tr:first-child th:first-child,
 thead tr:first-child th:nth-child(2) { text-align: left; }
 
-/* Sub-header row */
 thead tr:last-child {
   background: #1d1a15; color: var(--paper2);
 }
@@ -345,7 +327,6 @@ tbody tr {
 tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--paper3); }
 
-/* Model group rows */
 .model-group-row td {
   background: var(--paper2);
   padding: 0.3rem 0.9rem;
@@ -401,7 +382,6 @@ footer .footer-title {
   nav { padding: 0 1rem; }
   .nav-links { gap: 1rem; }
   .sec { padding: 60px 1rem; }
-  .video-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -485,9 +465,9 @@ footer .footer-title {
     We evaluate on four LIBERO task suites: <em>Spatial</em>, <em>Object</em>, <em>Goal</em>, and <em>LIBERO-10 (Long)</em>. Each panel below shows side-by-side clean vs. attacked robot behavior.
   </p>
 
-  <!-- LIBERO-Spatial row -->
-  <p class="sec-body reveal" style="margin-bottom:0.8rem;font-weight:600;color:var(--amber);">LIBERO-Spatial</p>
-  <div class="video-grid video-grid-4 reveal" style="margin-bottom:2.4rem;">
+  <!-- ── LIBERO-Spatial ── -->
+  <p class="task-label reveal">LIBERO-Spatial</p>
+  <div class="video-grid-4 reveal">
 
     <div class="video-panel">
       <div class="video-inner">
@@ -535,9 +515,9 @@ footer .footer-title {
 
   </div>
 
-  <!-- LIBERO-Object row -->
-  <p class="sec-body reveal" style="margin-bottom:0.8rem;font-weight:600;color:var(--amber);">LIBERO-Object</p>
-  <div class="video-grid video-grid-4 reveal" id="videoGrid">
+  <!-- ── LIBERO-Object ── -->
+  <p class="task-label reveal">LIBERO-Object</p>
+  <div class="video-grid-4 reveal">
 
     <div class="video-panel">
       <div class="video-inner">
@@ -584,6 +564,107 @@ footer .footer-title {
     </div>
 
   </div>
+
+  <!-- ── LIBERO-Goal ── -->
+  <p class="task-label reveal">LIBERO-Goal</p>
+  <div class="video-grid-4 reveal">
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/goal/adv/episode=1--success=False--task=pick_up_the_book_and_place_it_in_the_back_compartment.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Pick up the book</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/goal/adv/episode=2--success=False--task=pick_up_the_butter_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Pick up the butter</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/goal/adv/episode=3--success=False--task=pick_up_the_can_and_place_it_on_the_plate.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Pick up the can</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/goal/adv/episode=4--success=False--task=pick_up_the_mug_and_place_it_on_the_coffee_maker.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Pick up the mug</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LIBERO-Long ── -->
+  <p class="task-label reveal">LIBERO-Long (LIBERO-10)</p>
+  <div class="video-grid-4 reveal">
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/long/adv/episode=1--success=False--task=pick_up_the_alphabet_soup_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Alphabet soup → basket</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/long/adv/episode=2--success=False--task=pick_up_the_salad_dressing_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Salad dressing → basket</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/long/adv/episode=3--success=False--task=pick_up_the_bbq_sauce_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">BBQ sauce → basket</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+    <div class="video-panel">
+      <div class="video-inner">
+        <video src="video/long/adv/episode=4--success=False--task=pick_up_the_orange_juice_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
+      </div>
+      <div class="video-label">
+        <span class="video-label-name">Orange juice → basket</span>
+        <span class="video-label-badge badge-attack">Tex3D</span>
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 <hr class="divider">
@@ -738,10 +819,10 @@ footer .footer-title {
   <p class="footer-title">Tex3D</p>
   <p>Objects as Attack Surfaces via Adversarial 3D Textures for Vision-Language-Action Models</p>
   <br>
-  <p>Questions? <a href="/cdn-cgi/l/email-protection#6f0c00011b0e0c1b2f0a170e021f030a410c0002"><span class="__cf_email__" data-cfemail="02616d6c7663617642677a636f726e672c616d6f">[email&#160;protected]</span></a> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">arXiv</a></p>
+  <p>Questions? <a href="mailto:contact@example.com">contact@example.com</a> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">arXiv</a></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Scroll reveal ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
@@ -751,20 +832,21 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   obs.observe(el);
 });
 
-// ── Video tab filtering ──
-function switchTab(btn, task) {
-  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('#videoGrid .video-panel').forEach(panel => {
-    if (task === 'all' || panel.dataset.task === task) {
-      panel.style.display = '';
-    } else {
-      panel.style.display = 'none';
-    }
-  });
-}
-
 // ── Play toggle logic ──
 function toggleVideo(btn) {
   const inner = btn.closest('.video-inner');
-  const vid = inner.querySelector(
+  const vid = inner.querySelector('video');
+  if (!vid) return;
+  if (vid.paused) {
+    vid.play();
+    btn.textContent = '⏸';
+    inner.style.cursor = 'default';
+  } else {
+    vid.pause();
+    btn.textContent = '▶';
+  }
+}
+</script>
+
+</body>
+</html>

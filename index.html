@@ -68,6 +68,7 @@ nav {
     radial-gradient(ellipse 70% 50% at 50% -10%, rgba(200,136,42,0.12) 0%, transparent 60%),
     var(--paper);
 }
+/* Decorative ruled lines */
 .hero::before {
   content: '';
   position: absolute; inset: 0;
@@ -207,18 +208,35 @@ hr.divider {
 .contrib-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
 .contrib-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
 
-/* ── VIDEO GRID ── */
+/* ── VIDEO / DEMO GRID ── */
+.sim-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-style: italic;
+  color: var(--muted); text-align: center; margin-bottom: 1.6rem;
+}
+.demo-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 1.6rem; flex-wrap: wrap;
+}
+.demo-tab {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  border-radius: 3px; cursor: pointer;
+  background: transparent; color: var(--muted);
+  transition: all 0.2s; font-family: 'Source Serif 4', serif;
+}
+.demo-tab.active, .demo-tab:hover {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+
+/* Video panels grid */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-  margin-top: 1.6rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
-@media (max-width: 900px) {
+@media (min-width: 700px) {
   .video-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .video-grid { grid-template-columns: 1fr; }
 }
 
 .video-panel {
@@ -235,75 +253,53 @@ hr.divider {
 .video-inner {
   aspect-ratio: 16/9;
   background: #1a1712;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.8rem; cursor: pointer;
+  position: relative; overflow: hidden;
 }
-/* scan line */
+/* Animated scan line effect */
 .video-inner::after {
   content: '';
   position: absolute; top: -100%; left: 0; right: 0; height: 40%;
   background: linear-gradient(transparent, rgba(200,136,42,0.05), transparent);
   animation: scan 3s linear infinite;
-  pointer-events: none;
-  z-index: 2;
 }
-@keyframes scan { to { top: 200%; } }
-
+@keyframes scan {
+  to { top: 200%; }
+}
 .video-inner video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  position: absolute; top: 0; left: 0;
-  z-index: 1;
+  width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
 }
-/* overlay: shown when paused, hidden when playing */
-.video-overlay {
-  position: absolute; inset: 0; z-index: 3;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(12,11,9,0.25);
-  transition: opacity 0.2s;
-}
-.video-inner.playing .video-overlay { opacity: 0; pointer-events: none; }
-
 .video-play-btn {
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 52px; height: 52px; border-radius: 50%;
   background: rgba(200,136,42,0.9);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; color: white;
-  box-shadow: 0 0 28px rgba(200,136,42,0.5);
+  font-size: 1.2rem; color: white;
+  box-shadow: 0 0 30px rgba(200,136,42,0.5);
   transition: transform 0.2s, box-shadow 0.2s;
-  user-select: none;
+  z-index: 10;
 }
 .video-inner:hover .video-play-btn {
   transform: scale(1.1);
-  box-shadow: 0 0 44px rgba(200,136,42,0.7);
+  box-shadow: 0 0 50px rgba(200,136,42,0.7);
 }
-
 .video-label {
-  padding: 0.6rem 0.9rem;
+  padding: 0.7rem 1rem;
   background: rgba(12,11,9,0.95);
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem;
+  display: flex; align-items: center; justify-content: space-between;
 }
 .video-label-name {
-  font-size: 0.78rem; font-weight: 500; color: var(--paper2);
+  font-size: 0.82rem; font-weight: 500; color: var(--paper2);
   font-family: 'Source Serif 4', serif;
-  line-height: 1.4;
-}
-.video-label-task {
-  font-size: 0.68rem; color: rgba(245,240,232,0.45);
-  font-family: 'Source Serif 4', serif;
-  margin-top: 0.1rem;
 }
 .video-label-badge {
-  font-size: 0.66rem; padding: 0.15rem 0.55rem;
+  font-size: 0.68rem; padding: 0.15rem 0.55rem;
   border-radius: 2px; font-weight: 600; letter-spacing: 0.06em;
-  text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
-  margin-top: 0.1rem;
+  text-transform: uppercase;
 }
-.badge-clean  { background: rgba(52,180,100,0.2);  color: #52c878; }
 .badge-attack { background: rgba(192,57,43,0.25); color: #e8705f; }
-
-
+.badge-clean  { background: rgba(52,180,100,0.2);  color: #52c878; }
 
 /* ── RESULTS TABLE ── */
 .table-scroll { overflow-x: auto; border-radius: 6px; border: 1px solid var(--border); margin-top: 1.6rem; }
@@ -321,6 +317,7 @@ thead tr:first-child th {
 thead tr:first-child th:first-child,
 thead tr:first-child th:nth-child(2) { text-align: left; }
 
+/* Sub-header row */
 thead tr:last-child {
   background: #1d1a15; color: var(--paper2);
 }
@@ -341,6 +338,7 @@ tbody tr {
 tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--paper3); }
 
+/* Model group rows */
 .model-group-row td {
   background: var(--paper2);
   padding: 0.3rem 0.9rem;
@@ -391,11 +389,12 @@ footer .footer-title {
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ── RESPONSIVE NAV ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   nav { padding: 0 1rem; }
   .nav-links { gap: 1rem; }
   .sec { padding: 60px 1rem; }
+  .video-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -472,127 +471,82 @@ footer .footer-title {
 
 <hr class="divider">
 
-<!-- ══════════════════════════════════════════
-     DEMO — LIBERO-Object adversarial episodes
-═══════════════════════════════════════════ -->
 <section class="sec" id="demo">
-  <div class="sec-rule reveal"><span>Simulation Demo</span></div>
-  <h2 class="reveal">LIBERO-Object: adversarial attack demonstrations</h2>
+  <div class="sec-rule reveal"><span>Simulation Setup &amp; Demo</span></div>
+  <h2 class="reveal">Attack demonstrations across LIBERO tasks</h2>
   <p class="sec-body reveal" style="margin-bottom:2rem;">
-    Each clip shows a robot failing a pick-and-place task under <strong>TexTrojan</strong> adversarial 3D textures. The adversarial texture is applied directly to the manipulated object, causing the robot to fail without any modification to the environment or task instructions.
+    We evaluate on four LIBERO task suites: <em>Spatial</em>, <em>Object</em>, <em>Goal</em>, and <em>LIBERO-10 (Long)</em>. Each panel below shows side-by-side clean vs. attacked robot behavior.
   </p>
 
   <div class="video-grid reveal" id="videoGrid">
 
-    <!-- chocolate pudding -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-10_45_05--episode=1--success=False--task=pick_up_the_chocolate_pudding_and_place_it_in_the_.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-10_45_05--episode=1--success=False--task=pick_up_the_chocolate_pudding_and_place_it_in_the_.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the chocolate pudding</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the chocolate pudding</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-    <!-- milk -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-10_45_40--episode=1--success=False--task=pick_up_the_milk_and_place_it_in_the_basket.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-10_45_40--episode=1--success=False--task=pick_up_the_milk_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the milk</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the milk</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-    <!-- tomato sauce -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-10_46_10--episode=1--success=False--task=pick_up_the_tomato_sauce_and_place_it_in_the_baske.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-10_46_10--episode=1--success=False--task=pick_up_the_tomato_sauce_and_place_it_in_the_baske.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the tomato sauce</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the tomato sauce</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-    <!-- cream cheese -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-10_46_39--episode=1--success=False--task=pick_up_the_cream_cheese_and_place_it_in_the_baske.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-10_46_39--episode=1--success=False--task=pick_up_the_cream_cheese_and_place_it_in_the_baske.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the cream cheese</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the cream cheese</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-    <!-- orange juice -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-11_03_05--episode=1--success=False--task=pick_up_the_orange_juice_and_place_it_in_the_baske.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-11_03_05--episode=1--success=False--task=pick_up_the_orange_juice_and_place_it_in_the_baske.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the orange juice</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the orange juice</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-    <!-- butter -->
     <div class="video-panel">
-      <div class="video-inner" onclick="toggleVideo(this)">
-        <video src="video/object/adv/2026_03_21-11_08_15--episode=1--success=False--task=pick_up_the_butter_and_place_it_in_the_basket.mp4"
-               loop muted playsinline preload="metadata"></video>
-        <div class="video-overlay">
-          <div class="video-play-btn">▶</div>
-        </div>
+      <div class="video-inner">
+        <video src="video/object/adv/2026_03_21-11_08_15--episode=1--success=False--task=pick_up_the_butter_and_place_it_in_the_basket.mp4" loop muted playsinline></video>
+        <div class="video-play-btn" onclick="toggleVideo(this)">▶</div>
       </div>
       <div class="video-label">
-        <div>
-          <div class="video-label-name">Pick up the butter</div>
-          <div class="video-label-task">and place it in the basket</div>
-        </div>
+        <span class="video-label-name">Pick up the butter</span>
         <span class="video-label-badge badge-attack">TexTrojan</span>
       </div>
     </div>
 
-  </div><!-- /video-grid -->
+  </div>
 </section>
 
 <hr class="divider">
@@ -747,38 +701,43 @@ footer .footer-title {
   <p class="footer-title">TexTrojan</p>
   <p>Objects as Attack Surfaces via Adversarial 3D Textures for Vision-Language-Action Models</p>
   <br>
-  <p>Questions? <a href="/cdn-cgi/l/email-protection#d6b5b9b8a2b7b5a296b3aeb7bba6bab3f8b5b9bb"><span class="__cf_email__" data-cfemail="05666a6b7164667145607d64687569602b666a68">[email&#160;protected]</span></a> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">arXiv</a></p>
+  <p>Questions? <a href="mailto:contact@example.com">contact@example.com</a> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">arXiv</a></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Scroll reveal ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.06 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach((el, i) => {
   el.style.transitionDelay = (i % 5) * 0.07 + 's';
   obs.observe(el);
 });
 
-// ── Click to play / pause ──
-function toggleVideo(inner) {
-  const vid = inner.querySelector('video');
-  if (!vid) return;
-  if (vid.paused) {
-    // pause all others first
-    document.querySelectorAll('.video-inner.playing').forEach(other => {
-      if (other !== inner) {
-        other.querySelector('video').pause();
-        other.classList.remove('playing');
-      }
-    });
-    vid.play();
-    inner.classList.add('playing');
-  } else {
-    vid.pause();
-    inner.classList.remove('playing');
-  }
+// ── Video tab filtering ──
+function switchTab(btn, task) {
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#videoGrid .video-panel').forEach(panel => {
+    if (task === 'all' || panel.dataset.task === task) {
+      panel.style.display = '';
+    } else {
+      panel.style.display = 'none';
+    }
+  });
 }
 
-// Re-show overlay when video ends (loop restarts — just in case)
-document.querySelectorAll('.video-inner v
+// ── Play toggle logic ──
+function toggleVideo(btn) {
+  const inner = btn.closest('.video-inner');
+  const vid = inner.querySelector('video');
+  if (vid) {
+    if (vid.paused) { vid.play(); btn.textContent = '⏸'; }
+    else { vid.pause(); btn.textContent = '▶'; }
+  } else {
+    btn.textContent = btn.textContent === '▶' ? '⏸' : '▶';
+  }
+}
+</script>
+</body>
+</html>

@@ -782,7 +782,7 @@ def train_adversarial_texture_feature_attack(cfg, policy, renderer, initial_obs_
         param.requires_grad = False
     model.eval()
 
-    num_frames = getattr(cfg, "num_frames", 5)
+    num_frames = getattr(cfg, "num_frames", 20)
     lambda_nat = getattr(cfg, "lambda_nat", 0.1)
 
     env, frame_data = collect_frame_data(
@@ -1041,7 +1041,7 @@ class GenerateConfig:
 
     attack_iters: int   = 5000
     attack_lr:    float = 0.01
-    num_frames:   int   = 5
+    num_frames:   int   = 20
     lambda_nat:   float = 0.01
 
     save_attack_artifacts: bool = True

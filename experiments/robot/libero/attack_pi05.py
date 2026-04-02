@@ -1045,7 +1045,7 @@ class GenerateConfig:
     lambda_nat:   float = 0.01
 
     save_attack_artifacts: bool = True
-    local_log_dir:         str  = "./experiments/pi0_attacks"
+    local_log_dir:         str  = "./experiments/pi05_attacks"
 
     latent_encoder_config: str  = "./taming-transformers/configs/vqgan_imagenet_f16_16384.yaml"
     latent_encoder_ckpt:   str  = "./taming-transformers/checkpoints/vqgan_imagenet_f16_16384.ckpt"

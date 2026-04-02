@@ -112,6 +112,23 @@ nav {
   animation: fadeUp 0.6s 0.2s ease both;
 }
 .hero-authors a { color: var(--amber); text-decoration: none; }
+
+/* ── Author annotation styles ── */
+sup.author-mark {
+  font-size: 0.65em;
+  color: var(--amber);
+  font-style: normal;
+  vertical-align: super;
+  line-height: 0;
+}
+.author-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+  animation: fadeUp 0.6s 0.23s ease both;
+}
+.author-note sup { color: var(--amber); font-size: 0.85em; }
+
 .hero-affil {
   font-size: 0.82rem; color: var(--muted); margin-bottom: 2.4rem;
   animation: fadeUp 0.6s 0.25s ease both;
@@ -441,15 +458,23 @@ footer .footer-home {
       <span class="highlight">Tex3D</span>: Objects as Attack Surfaces via<br>
       Adversarial 3D Textures for<br>Vision-Language-Action Models
     </h1>
+    <!-- Change 1: Authors with co-first (*) and corresponding (†) markers -->
     <p class="hero-authors">
-      Author One, Author Two, Author Three, Author Four
+      Jiawei Chen<sup class="author-mark">*</sup>,
+      Simin Huang<sup class="author-mark">*</sup>,
+      Jiawei Du<sup class="author-mark">†</sup>,
+      Shuaihang Chen,
+      Yu Tian,
+      Mingjie Wei,
+      Chao Yu,
+      Zhaoxia Yin<sup class="author-mark">†</sup>
     </p>
-    <p class="hero-affil">Your University &nbsp;·&nbsp; Research Institute</p>
+    <p class="author-note"><sup>*</sup> Equal contribution &nbsp;&nbsp; <sup>†</sup> Corresponding authors</p>
+    <p class="hero-affil">East China Normal University (ECNU)</p>
     <div class="btn-row">
-      <!-- Change 5: "Paper" → "Project" pointing to current page; "arXiv" → "Paper" -->
       <a href="." class="btn btn-solid">🏠 Project</a>
       <a href="#" class="btn btn-ghost">📄 Paper</a>
-      <a href="https://github.com/jj0004whitegmn-maker/tex3d" class="btn btn-ghost" target="_blank">💻 Code</a>
+      <a href="#" class="btn btn-ghost">💻 Code</a>
     </div>
   </div>
 </div>
@@ -460,8 +485,6 @@ footer .footer-home {
 <section class="sec" id="abstract">
   <div class="sec-rule reveal"><span>Abstract</span></div>
 
-  <!-- Change 3: Image BEFORE abstract -->
-  <!-- Place your image at image/figure1.png (PNG recommended) -->
   <div class="abstract-img-wrap reveal">
     <img src="image/first_v3_00.png" alt="Overview figure" onerror="this.parentElement.style.display='none'">
     <div class="img-caption">Figure 1: Overview of the Tex3D attack pipeline.</div>
@@ -475,8 +498,6 @@ footer .footer-home {
     Built on these designs, we present <strong>Tex3D</strong>, the first framework for end-to-end optimization of 3D adversarial textures directly within the VLA simulation environment. Experiments in both simulation and real-robot settings show that Tex3D significantly degrades VLA performance across multiple manipulation tasks, achieving task failure rates of up to <strong>96.7%</strong>.
   </div>
 
-  <!-- Change 3: Image AFTER abstract -->
-  <!-- Place your image at image/figure2.png (PNG recommended) -->
   <div class="abstract-img-wrap reveal" style="margin-top:2rem;">
     <img src="image/framework_v4_00.png" alt="Method figure" onerror="this.parentElement.style.display='none'">
     <div class="img-caption">Figure 2: Detailed illustration of FBD and TAAO components.</div>
@@ -543,7 +564,6 @@ footer .footer-home {
       </thead>
       <tbody>
 
-        <!-- Change 4: citation numbers removed from model names -->
         <tr class="model-group-row"><td colspan="14">OpenVLA</td></tr>
         <tr>
           <td></td><td>Spatial</td>
@@ -885,16 +905,15 @@ footer .footer-home {
      FOOTER
 ══════════════════════════════ -->
 <footer>
-  <!-- Change 6: homepage link added at top of footer -->
+  <!-- Change 3: updated homepage URL -->
   <p class="footer-home">
-    🏠 Homepage: <a href="https://s-cjw24.github.io" target="_blank">s-cjw24.github.io</a>
+    🏠 Homepage: <a href="https://vla-attack.github.io/tex3d/#" target="_blank">vla-attack.github.io/tex3d</a>
     &nbsp;·&nbsp;
     <a href="." target="_self">Tex3D Project Page</a>
   </p>
   <p class="footer-title">Tex3D</p>
   <p>Objects as Attack Surfaces via Adversarial 3D Textures for Vision-Language-Action Models</p>
   <br>
-  <!-- Change 6: email updated -->
   <p>Questions? <a href="mailto:s-cjw24@bza.edu.cn">s-cjw24@bza.edu.cn</a> &nbsp;·&nbsp; <a href="https://github.com/jj0004whitegmn-maker/tex3d" target="_blank">GitHub</a> &nbsp;·&nbsp; <a href="#">arXiv</a></p>
 </footer>
 
@@ -915,21 +934,19 @@ function toggleVideo(btn) {
   if (!vid) return;
   if (vid.paused) {
     vid.play();
-    btn.classList.add('hidden');   // hide button when playing
+    btn.classList.add('hidden');
   } else {
     vid.pause();
-    btn.classList.remove('hidden'); // show button when paused
+    btn.classList.remove('hidden');
     btn.textContent = '▶';
   }
 }
 
-// Show play button again if video ends (since it's looped this won't fire, but good practice)
 document.querySelectorAll('.video-inner video').forEach(vid => {
   vid.addEventListener('ended', () => {
     const btn = vid.closest('.video-inner').querySelector('.video-play-btn');
     if (btn) { btn.classList.remove('hidden'); btn.textContent = '▶'; }
   });
-  // Also show button on click anywhere on the inner when playing (to allow pausing)
   vid.addEventListener('click', () => {
     const inner = vid.closest('.video-inner');
     const btn = inner.querySelector('.video-play-btn');

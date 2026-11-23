@@ -577,11 +577,9 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 We thank the authors of [LIBERO](https://github.com/Lifelong-Robot-Learning/LIBERO), [OpenVLA](https://github.com/openvla/openvla), [Nvdiffrast](https://github.com/NVlabs/nvdiffrast), and [MuJoCo](https://github.com/google-deepmind/mujoco) for their open-source contributions that made this work possible.
 
-## ⚠️ Limitations
+## 🛠️ Code Patches
 
-Tex3D was designed for low-dimensional vertex-based texture optimization. However, many 3D assets lack the required vertex structure. The implementation therefore prioritizes vertex-based parameterization when available and falls back to mesh-based parameterization otherwise. This asset dependency remains a limitation.
-
-
+**Vertex Optimization.** Tex3D prioritizes low-dimensional vertex-based optimization. For 3D assets lacking the required vertex structure, the code falls back to mesh-based optimization.
 ---
 
 <div align="center">

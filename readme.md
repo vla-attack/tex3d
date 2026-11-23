@@ -549,6 +549,13 @@ Each task is executed for **50 independent trials**. Performance is measured by 
 
 ---
 
+## 🛠️ Code Patches
+
+**Vertex Optimization.** 
+Tex3D prioritizes low-dimensional vertex-based optimization. For 3D assets lacking the required vertex structure, the code falls back to mesh-based optimization.
+
+---
+
 ## 📖 Citation
 
 If you find Tex3D useful for your research, please cite:
@@ -577,9 +584,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 We thank the authors of [LIBERO](https://github.com/Lifelong-Robot-Learning/LIBERO), [OpenVLA](https://github.com/openvla/openvla), [Nvdiffrast](https://github.com/NVlabs/nvdiffrast), and [MuJoCo](https://github.com/google-deepmind/mujoco) for their open-source contributions that made this work possible.
 
-## 🛠️ Code Patches
 
-**Vertex Optimization.** Tex3D prioritizes low-dimensional vertex-based optimization. For 3D assets lacking the required vertex structure, the code falls back to mesh-based optimization.
 ---
 
 <div align="center">
